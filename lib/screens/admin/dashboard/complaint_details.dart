@@ -195,6 +195,7 @@ class ComplaintDetails extends StatelessWidget {
         }
 
         return Scaffold(
+          backgroundColor: Theme.of(context).cardColor,
           appBar: AppBarComponent(
             icon: InkWell(
               onTap: () {

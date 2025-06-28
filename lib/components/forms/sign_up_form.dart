@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_associate/bloc/auth/auth_bloc.dart';
-import 'package:tech_associate/bloc/compliant/compliant_bloc.dart';
-import 'package:tech_associate/bloc/compliant/compliant_event.dart';
 import 'package:tech_associate/widgets/continue_button.dart';
 import 'package:tech_associate/widgets/input_text_field.dart';
-import 'package:tech_associate/widgets/simple_text.dart';
 import 'package:tech_associate/widgets/forms/department_selector.dart';
-import 'package:tech_associate/data/models/department.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});

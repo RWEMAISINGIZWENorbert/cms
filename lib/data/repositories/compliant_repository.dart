@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:tech_associate/data/models/compliant.dart';
-import 'package:uuid/uuid.dart';
 import 'package:tech_associate/utils/auth_manager.dart';
 
 class CompliantRepository {

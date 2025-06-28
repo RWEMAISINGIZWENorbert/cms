@@ -40,13 +40,13 @@ class Department {
       ),
       Department(
         id: '3',
-        name: 'Transport',
+        name: 'transport',
         description: 'Solve the poblem for those who meet with the issues in the Transport',
         categoryIds: ['6'], // Training Request
       ),
       Department(
         id: '4',
-        name: 'Agriculture',
+        name: 'agriculture',
         description: 'Handle the serviced for the farmers and the clents of the farmers',
         categoryIds: ['2'],
       ),

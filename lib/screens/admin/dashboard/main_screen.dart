@@ -22,15 +22,23 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).cardColor,
         body: Padding(
-        padding: EdgeInsets.only(top: 22),
+        padding: const EdgeInsets.only(top: 22),
         child: ScreenNavigator.getBodyContent(_currentIndex)
         ),
       bottomNavigationBar: MyBottomAppBar(
         currentIndex: _currentIndex,
         onItemTapped: _onItemTapped
       ),   
+      // bottomNavigationBar: BottomNavigationBar(
+      //   backgroundColor: Colors.white,
+      //   items: const [
+      //      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'hello'),
+      //      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'hello'),
+      //      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'hello'),
+      //   ]  
+      // ),
     );
   }
 }

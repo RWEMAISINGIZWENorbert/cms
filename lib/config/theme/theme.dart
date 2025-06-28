@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-ThemeData  lightTheme = ThemeData(
+ThemeData lightTheme = ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.grey[200],
         primaryColor: Colors.green[700],
@@ -10,7 +10,7 @@ ThemeData  lightTheme = ThemeData(
         secondaryHeaderColor: Colors.grey[700],
         cardColor: const Color.fromRGBO(255, 255, 255, 1),
         hintColor: Colors.black87,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           size: 28,
           fill: 1.0,
           color: Colors.black87
@@ -71,6 +71,8 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: Colors.black45,
   primaryColor: Colors.green[700],
   // primaryColor: Colors.amber[700],
+  secondaryHeaderColor: Colors.black12,
+  hintColor: Colors.white60,
   textTheme: TextTheme(
               titleLarge: GoogleFonts.poppins(
             color: Colors.green[700],

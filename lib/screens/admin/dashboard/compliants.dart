@@ -55,6 +55,7 @@ class _CompliantsState extends State<Compliants> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
       appBar: _isSearching ? _buildSearchAppBar() : _buildNormalAppBar(),
       body: _isSearching ? _buildSearchResults() : _buildComplaintsList(),
     );

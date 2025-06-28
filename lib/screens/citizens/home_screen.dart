@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final color = isDark ? Colors.white : Colors.black;
     return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         actions: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class InputTextField extends StatelessWidget {
+class InputTextField extends StatefulWidget {
   final String labelText;
   final String hintText;
   final bool obscureText;
@@ -25,11 +25,16 @@ class InputTextField extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    // final theme = Theme.of(context);
+  State<InputTextField> createState() => _InputTextFieldState();
+}
 
+class _InputTextFieldState extends State<InputTextField> {
+  bool _isPasswordVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Focus(
-      focusNode: focusNode,
+      focusNode: widget.focusNode,
       child: Builder(
         builder: (context) {
           final hasFocus = Focus.of(context).hasFocus;
@@ -49,18 +54,31 @@ class InputTextField extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: TextFormField(
-                  focusNode: focusNode,
-                  controller: controller,
-                  keyboardType: keyboardType,
-                  obscureText: obscureText,
-                  maxLines: obscureText ? 1 : (maxLines ?? 1),
-                  validator: validator,
-                  onChanged: onChanged,
+                  focusNode: widget.focusNode,
+                  controller: widget.controller,
+                  keyboardType: widget.keyboardType,
+                  obscureText: widget.obscureText && !_isPasswordVisible,
+                  maxLines: widget.obscureText ? 1 : (widget.maxLines ?? 1),
+                  validator: widget.validator,
+                  onChanged: widget.onChanged,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    // labelText: labelText,
-                    hintText: hintText,
-                    // hoverColor: colorScheme.primary.withOpacity(0.1),
+                    hintText: widget.hintText,
+                    suffixIcon: widget.obscureText
+                        ? IconButton(
+                            icon: Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Theme.of(context).hintColor,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
+                          )
+                        : null,
                   ),
                 ),
               ),

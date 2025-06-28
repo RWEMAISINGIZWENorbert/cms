@@ -15,16 +15,17 @@ class TrackStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController ticketController = TextEditingController();
     final double screenHeight = MediaQuery.of(context).size.height;
-    return SingleChildScrollView(
-      child: Scaffold(
-        appBar: AppBarComponent(
-          icon: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Icon(IconlyLight.arrow_left_circle),
-          ),
-          title: 'Track your compliant',
+    return Scaffold(
+      backgroundColor: Theme.of(context).cardColor,
+      appBar: AppBarComponent(
+        icon: InkWell(
+          onTap: () => Navigator.of(context).pop(),
+          child: const Icon(IconlyLight.arrow_left_circle),
         ),
-        body: BlocBuilder<CompliantBloc, CompliantState>(
+        title: 'Track your compliant',
+      ),
+      body: SingleChildScrollView(
+        child: BlocBuilder<CompliantBloc, CompliantState>(
           builder: (context, state) {
             return SizedBox(
               height: screenHeight * 0.7,

@@ -10,6 +10,8 @@ abstract class CompliantState extends Equatable {
 
 class CompliantInitial extends CompliantState {}
 
+class CompliantsEmpty extends CompliantState {}
+
 class CompliantLoading extends CompliantState {}
 
 class CompliantLoaded extends CompliantState {

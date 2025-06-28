@@ -109,8 +109,21 @@ class AuthRepository {
   }
 
   Future<void> logout() async {
-     AuthManager.logout();
-    await userRepository.clearUser(); // Clear user data on logout
+      final accessToken = await AuthManager.readAuth();
+     final response = await http.get(
+       Uri.parse("${baseUrl}/logout"),
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken'
+        },
+        );
+      if(response.statusCode == 204 || response.statusCode == 200){
+            AuthManager.logout();
+          await userRepository.clearUser();
+      }else {
+        print("------------ Faield to loout");
+        return;
+      } // Clear user data on logout
   }
 
   Future<String?> getAccessToken() async {

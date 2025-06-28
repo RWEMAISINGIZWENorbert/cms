@@ -15,8 +15,7 @@ class MyBarGraph extends StatelessWidget {
     return BlocBuilder<CompliantBloc, CompliantState>(
       builder: (context, state) {
         if (state is CompliantLoaded) {
-          final compliants = state.compliants;
-          
+          final compliants = state.compliants;          
           // Debug prints
           print('Total complaints: ${compliants.length}');
           
@@ -45,7 +44,7 @@ class MyBarGraph extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
+                      color: Colors.black.withValues(alpha: 0.05),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -57,7 +56,7 @@ class MyBarGraph extends StatelessWidget {
                     Icon(
                       Icons.bar_chart,
                       size: 48,
-                      color: Theme.of(context).hintColor.withOpacity(0.5),
+                      color: Theme.of(context).hintColor.withValues(alpha: 0.5),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -116,11 +115,48 @@ class MyBarGraph extends StatelessWidget {
               ).toList(),
             ),
           );
+        }else if (state is CompliantLoading){
+           return const Center(child: CircularProgressIndicator());
+        }else if(state is CompliantsEmpty){
+           return Center(
+             child: Container(
+               padding: const EdgeInsets.all(16),
+               decoration: BoxDecoration(
+                 color: Theme.of(context).cardColor,
+                 borderRadius: BorderRadius.circular(12),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.black.withValues(alpha: 0.05),
+                     blurRadius: 10,
+                     offset: const Offset(0, 4),
+                   ),
+                 ],
+               ),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Icon(
+                     Icons.inbox_outlined,
+                     size: 48,
+                     color: Theme.of(context).hintColor.withValues(alpha: 0.5),
+                   ),
+                   const SizedBox(height: 16),
+                   Text(
+                     'No complaints data available',
+                     style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                       color: Theme.of(context).hintColor,
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+           );
         }
         
         // Show loading state
-        return const Center(
-          child: CircularProgressIndicator(),
+        return  Center(
+          child: Text("$state"),
         );
       },
     );

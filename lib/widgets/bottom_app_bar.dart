@@ -16,7 +16,7 @@ class MyBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return BottomAppBar(
-         height: screenHeight * 0.14,
+         height: screenHeight * 0.11,
         color: Colors.transparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -25,22 +25,23 @@ class MyBottomAppBar extends StatelessWidget {
               onTap: (){
                  onItemTapped(0);
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       currentIndex == 0 ?  IconlyBold.home: IconlyLight.home,
                       color: currentIndex == 0 ? Theme.of(context).primaryColor  : Theme.of(context).hintColor,
-                      size: 28,
+                      size: 22,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 1),
                     Text(
                       'Dashboard', 
-                      style: currentIndex == 0 
+                      style: (currentIndex == 0 
                       ? Theme.of(context).textTheme.labelSmall!.copyWith(color: Theme.of(context).primaryColor) 
-                      : Theme.of(context).textTheme.labelSmall
+                      : Theme.of(context).textTheme.labelSmall)?.copyWith(fontSize: 9),
                       ),
                   ],
                 ),
@@ -50,22 +51,23 @@ class MyBottomAppBar extends StatelessWidget {
               onTap: (){
                 onItemTapped(1);
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                     currentIndex == 1 ? Icons.list : Icons.list,
-                      size: 28,
+                     currentIndex == 1 ? IconlyBold.category : IconlyLight.category,
+                      size: 22,
                       color: currentIndex == 1 ? Theme.of(context).primaryColor  : Theme.of(context).hintColor,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 1),
                     Text(
-                      'complaints', 
-                      style: currentIndex == 1 
+                      'Complaints', 
+                      style: (currentIndex == 1 
                       ? Theme.of(context).textTheme.labelSmall!.copyWith(color: Theme.of(context).primaryColor) 
-                      : Theme.of(context).textTheme.labelSmall
+                      : Theme.of(context).textTheme.labelSmall)?.copyWith(fontSize: 9),
                       ),
                   ],
                 ),
@@ -75,23 +77,23 @@ class MyBottomAppBar extends StatelessWidget {
               onTap: (){
                 onItemTapped(2);
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                     currentIndex == 2 ? Icons.analytics : Icons.analytics,
-                     size: 28,
-                     fill: 1.0,
+                     currentIndex == 2 ? IconlyBold.chart : IconlyLight.chart,
+                     size: 22,
                      color: currentIndex == 2 ? Theme.of(context).primaryColor  : Theme.of(context).hintColor,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 1),
                     Text(
-                      'analyics', 
-                      style: currentIndex == 2 
+                      'Analytics', 
+                      style: (currentIndex == 2 
                       ? Theme.of(context).textTheme.labelSmall!.copyWith(color: Theme.of(context).primaryColor) 
-                      : Theme.of(context).textTheme.labelSmall
+                      : Theme.of(context).textTheme.labelSmall)?.copyWith(fontSize: 9),
                       ),
                   ],
                 ),
@@ -101,23 +103,23 @@ class MyBottomAppBar extends StatelessWidget {
               onTap: (){
                 onItemTapped(3);
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                      currentIndex == 3 ? IconlyBold.setting : IconlyLight.setting,
-                     size: 28,
-                     fill: 1.0,
+                     size: 22,
                      color: currentIndex == 3 ? Theme.of(context).primaryColor  : Theme.of(context).hintColor,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 1),
                     Text(
-                      'settings',
-                      style: currentIndex == 3 
+                      'Settings',
+                      style: (currentIndex == 3 
                       ? Theme.of(context).textTheme.labelSmall!.copyWith(color: Theme.of(context).primaryColor) 
-                      : Theme.of(context).textTheme.labelSmall
+                      : Theme.of(context).textTheme.labelSmall)?.copyWith(fontSize: 9),
                        ),
                   ],
                 ),

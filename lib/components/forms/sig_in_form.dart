@@ -12,12 +12,12 @@ class SigInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -83,7 +83,7 @@ class SigInForm extends StatelessWidget {
               }
               return ContinueButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate()) {
                     context.read<AuthBloc>().add(
                       SignInEvent(
                         emailAdress: emailController.text,

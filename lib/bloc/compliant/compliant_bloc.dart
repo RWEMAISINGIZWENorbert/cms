@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tech_associate/config/sms_config.dart';
-import 'package:tech_associate/data/models/compliant.dart';
 import 'package:tech_associate/data/repositories/compliant_repository.dart';
 import 'package:tech_associate/data/repositories/user_repository.dart';
 import 'package:tech_associate/bloc/compliant/compliant_event.dart';
@@ -61,9 +60,9 @@ class CompliantBloc extends Bloc<CompliantEvent, CompliantState> {
 
       if (filteredCompliants.isEmpty) {
         if (isConnected) {
-          emit(const CompliantError('No complaints found'));
+          emit(CompliantsEmpty());
         } else {
-          emit(const CompliantError('No complaints found in offline mode'));
+          emit(CompliantsEmpty());
         }
       } else {
         emit(CompliantLoaded(filteredCompliants));

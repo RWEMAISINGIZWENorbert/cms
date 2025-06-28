@@ -7,7 +7,7 @@ class SimpleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 6), 
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6), 
       child: Text(label, style: Theme.of(context).textTheme.displayMedium,)
       );
   }
