@@ -80,12 +80,6 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-      
-      final List<(String, ThemeMode)> themes = [
-        ('light', ThemeMode.light),
-        ('dark', ThemeMode.dark),
-        ('system', ThemeMode.system),
-      ];
 
     if (_isLoading) {
       return Scaffold(
@@ -108,136 +102,138 @@ class _SettingsState extends State<Settings> {
               child: const Icon(IconlyLight.arrow_left_circle),
             ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Information Section
-            const Text(
-              'Profile Information',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            
-            // Name Field
-            _buildInfoField('Full Name', _userName, Icons.person),
-            const SizedBox(height: 16),
-            
-            // Email Field
-            _buildInfoField('Email Address', _userEmail, Icons.email),
-            const SizedBox(height: 40),
-            
-            // Theme Section
-            const Text(
-              'Appearance',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            
-            // Theme Toggle
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.05),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Theme.of(context).dividerColor,
-                  width: 1,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Profile Information Section
+              const Text(
+                'Profile Information',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.dark_mode,
-                      color: Theme.of(context).primaryColor,
-                      size: 20,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Dark Mode',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).textTheme.bodyLarge?.color,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Switch between light and dark theme',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Theme.of(context).hintColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Switch(
-                    value: Theme.of(context).brightness == Brightness.dark,
-                    onChanged: (value) {
-                      // Get current theme and switch to opposite
-                      final currentTheme = context.read<ThemeCubit>().state;
-                      final newTheme = currentTheme == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
-                      context.read<ThemeCubit>().updateTheme(newTheme);
-                      print('Theme switched to: ${newTheme == ThemeMode.dark ? 'dark' : 'light'}');
-                    },
-                    activeColor: Theme.of(context).hintColor,
-                  ),
-                ],
+              const SizedBox(height: 20),
+              
+              // Name Field
+              _buildInfoField('Full Name', _userName, Icons.person),
+              const SizedBox(height: 16),
+              
+              // Email Field
+              _buildInfoField('Email Address', _userEmail, Icons.email),
+              const SizedBox(height: 40),
+              
+              // Theme Section
+              const Text(
+                'Appearance',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 40),
-            
-            // Logout Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _logout,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[700], // Light red background
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              const SizedBox(height: 20),
+              
+              // Theme Toggle
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Theme.of(context).dividerColor,
+                    width: 1,
                   ),
-                  elevation: 0,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.logout, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Logout',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      child: Icon(
+                        Icons.dark_mode,
+                        color: Theme.of(context).primaryColor,
+                        size: 20,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Dark Mode',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Switch between light and dark theme',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).hintColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Switch(
+                      value: Theme.of(context).brightness == Brightness.dark,
+                      onChanged: (value) {
+                        // Get current theme and switch to opposite
+                        final currentTheme = context.read<ThemeCubit>().state;
+                        final newTheme = currentTheme == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                        context.read<ThemeCubit>().updateTheme(newTheme);
+                        print('Theme switched to: ${newTheme == ThemeMode.dark ? 'dark' : 'light'}');
+                      },
+                      activeColor: Theme.of(context).hintColor,
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 40),
+              
+              // Logout Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _logout,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[700], // Light red background
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.logout, color: Colors.white),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Logout',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

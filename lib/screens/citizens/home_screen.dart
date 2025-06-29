@@ -9,6 +9,7 @@ import 'package:tech_associate/components/forms/constraint_form.dart';
 import 'package:tech_associate/widgets/action_button.dart';
 import 'package:tech_associate/widgets/continue_button.dart';
 import 'package:tech_associate/data/models/category.dart';
+import 'package:tech_associate/cubit/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,6 +63,22 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         actions: [
+          // Theme Toggle Button
+          BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, themeMode) {
+              return IconButton(
+                onPressed: () {
+                  final currentTheme = context.read<ThemeCubit>().state;
+                  final newTheme = currentTheme == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                  context.read<ThemeCubit>().updateTheme(newTheme);
+                },
+                icon: Icon(
+                  themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
+                  color: color,
+                ),
+              );
+            },
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
             child: ActionButton(

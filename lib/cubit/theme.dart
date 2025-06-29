@@ -3,7 +3,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class ThemeCubit extends HydratedCubit<ThemeMode> {
    
-   ThemeCubit(): super(ThemeMode.light) {
+   ThemeCubit(): super(ThemeMode.system) {
      // Try to hydrate, but don't fail if storage is not ready
      try {
        hydrate();
@@ -20,7 +20,7 @@ class ThemeCubit extends HydratedCubit<ThemeMode> {
       try {
         return ThemeMode.values[json['theme'] as int];
       } catch (e) {
-        return ThemeMode.light; // Fallback to light theme
+        return ThemeMode.system; // Fallback to light theme
       }
   }
 

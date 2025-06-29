@@ -21,15 +21,19 @@ import 'package:tech_associate/screens/admin/dashboard/main_screen.dart';
 import 'package:tech_associate/screens/citizens/home_screen.dart';
 import 'package:tech_associate/screens/citizens/track_status.dart';
 import 'package:tech_associate/data/repositories/user_repository.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize HydratedBloc storage
-    HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: kIsWeb
-          ? HydratedStorageDirectory.web
-          : HydratedStorageDirectory((await getApplicationDocumentsDirectory()).path));
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+            ? HydratedStorageDirectory.web
+            : HydratedStorageDirectory(
+              (await getApplicationDocumentsDirectory()).path,
+            ),
+  ); 
   
   // Initialize Hive
   await Hive.initFlutter();
@@ -47,8 +51,8 @@ void main() async {
   runApp(const MyApp());
 }
 
-getApplicationDocumentsDirectory() {
-}
+// getApplicationDocumentsDirectory() {
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
