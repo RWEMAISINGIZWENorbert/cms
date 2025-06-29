@@ -57,7 +57,6 @@ class CategorySelector extends StatelessWidget {
               if (categoryName != null) {
                 final category = categories.firstWhere((c) => c.name == categoryName);
                 onCategorySelected(category);
-                print("-------------category: ${category.name}");
               }
             },
           );

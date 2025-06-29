@@ -47,7 +47,7 @@ class _InputTextFieldState extends State<InputTextField> {
                 border: Border.all(
                   color: hasFocus
                       ? Colors.grey
-                      : Theme.of(context).secondaryHeaderColor,
+                      : Theme.of(context).hintColor,
                   width: hasFocus ? 3.0 : 1.5,
                 ),
               ),

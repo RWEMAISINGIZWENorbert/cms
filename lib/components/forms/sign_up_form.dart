@@ -30,11 +30,10 @@ class _SignUpFormState extends State<SignUpForm> {
     super.dispose();
   }
 
-  void _handleSubmit() {
-    if (_formKey.currentState!.validate()) {
-      // TODO: Implement sign up logic
-    }
-  }
+  // void _handleSubmit() {
+  //   if (_formKey.currentState!.validate()) {
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

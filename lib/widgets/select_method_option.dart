@@ -20,51 +20,55 @@ class SelectMethodOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return ShadTheme(
-       data: ShadThemeData(
-        colorScheme: const ShadColorScheme(
-          background: Colors.white,
-          cardForeground: Colors.white,
-          card: Colors.white,
-          popover: Colors.black,
-          popoverForeground: Colors.white,
-          primaryForeground: Colors.white,
-          foreground: Colors.white,
-          muted: Colors.white,
-          mutedForeground: Colors.white,
-          primary:  ThemeMode.light == true ? Colors.amberAccent : Colors.green,
-          secondary: Colors.white,
-          secondaryForeground: Colors.white,
-          selection: Colors.white,
-          accent: ThemeMode.light == true ? Colors.amberAccent : Colors.green,
-          accentForeground: Colors.white,
-          border: Color.fromARGB(255, 61, 61, 61),
-          destructive: Colors.white,
-          destructiveForeground: Colors.white,
-          input: Color.fromARGB(255, 49, 49, 49),
-          ring: Colors.white,
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 1),
+      child: ShadTheme(
+         data: ShadThemeData(
+          colorScheme: ShadColorScheme(
+            background: isDarkMode ? Colors.white : Colors.black,
+            cardForeground: isDarkMode ? Colors.white : Colors.black,
+            card: isDarkMode ? Colors.white : Colors.black,
+            popover: isDarkMode ? Colors.black : Colors.white,
+            popoverForeground: isDarkMode ? Colors.white : Colors.black,
+            primaryForeground: isDarkMode ? Colors.white : Colors.black,
+            foreground: isDarkMode ? Colors.white : Colors.black,
+            muted: isDarkMode ? Colors.white : Colors.black,
+            mutedForeground: isDarkMode ? Colors.white : Colors.black,
+            primary: isDarkMode ? Colors.amberAccent : Colors.green,
+            secondary: isDarkMode ? Colors.white : Colors.black,
+            secondaryForeground: isDarkMode ? Colors.white : Colors.black,
+            selection: isDarkMode ? Colors.white : Colors.black,
+            accent: isDarkMode ? Colors.amberAccent : Colors.green,
+            accentForeground: isDarkMode ? Colors.white : Colors.black,
+            border: isDarkMode ? const Color.fromARGB(255, 61, 61, 61) : const Color.fromARGB(255, 200, 200, 200),
+            destructive: isDarkMode ? Colors.white : Colors.black,
+            destructiveForeground: isDarkMode ? Colors.white : Colors.black,
+            input: isDarkMode ? const Color.fromARGB(255, 49, 49, 49) : const Color.fromARGB(255, 240, 240, 240),
+            ring: isDarkMode ? Colors.white : Colors.black,
+          ),
+          brightness: isDarkMode ? Brightness.dark : Brightness.light,
         ),
-        brightness: Brightness.dark,
-      ),
-      child: ShadSelectFormField<String>(
-        onSaved: ((e) => print("The value $e")),
-        onChanged: onSelect,
-        id: '$label method',
-        minWidth: 350,
-        initialValue: isEditMode ? initialValue : null,
-        options: options
-            .map((m) => ShadOption(value: m, child: Text(m)))
-            .toList(),
-        selectedOptionBuilder: (context, value) => value == null
-            ? Text('Select the $label method')
-            : Text(value),
-        placeholder: Text('Select the $label method'),
-        validator: (v) {
-          if (v == null) {
-            return 'Please select the $label to display';
-          }
-          return null;
-        },
+        child: ShadSelectFormField<String>(
+          onSaved: ((e) => print("The value $e")),
+          onChanged: onSelect,
+          id: '$label method',
+          initialValue: isEditMode ? initialValue : null,
+          options: options
+              .map((m) => ShadOption(value: m, child: Text(m)))
+              .toList(),
+          selectedOptionBuilder: (context, value) => value == null
+              ? Text('Select the $label method')
+              : Text(value),
+          placeholder: Text('Select the $label method'),
+          validator: (v) {
+            if (v == null) {
+              return 'Please select the $label to display';
+            }
+            return null;
+          },
+        ),
       ),
     );
   }

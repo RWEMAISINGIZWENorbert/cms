@@ -41,6 +41,7 @@ class SigInForm extends StatelessWidget {
             labelText: "password",
             hintText: "Enter your secret password",
             keyboardType: TextInputType.text,
+            obscureText: true,
             controller: passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
