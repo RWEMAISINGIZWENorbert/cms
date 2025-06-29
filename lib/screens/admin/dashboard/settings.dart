@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconly/iconly.dart';
 import 'package:tech_associate/bloc/auth/auth_bloc.dart';
+import 'package:tech_associate/cubit/theme.dart';
 import 'package:tech_associate/data/repositories/user_repository.dart';
+import 'package:tech_associate/screens/admin/dashboard/main_screen.dart';
+import 'package:tech_associate/widgets/app_bar.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -28,8 +32,8 @@ class _SettingsState extends State<Settings> {
       
       if (currentUser != null) {
         setState(() {
-          _userName = currentUser.name ?? "Not provided";
-          _userEmail = currentUser.email ?? "Not provided";
+          _userName = currentUser.name;
+          _userEmail = currentUser.email;
           _isLoading = false;
         });
       } else {
@@ -76,6 +80,13 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+      
+      final List<(String, ThemeMode)> themes = [
+        ('light', ThemeMode.light),
+        ('dark', ThemeMode.dark),
+        ('system', ThemeMode.system),
+      ];
+
     if (_isLoading) {
       return Scaffold(
         backgroundColor: Theme.of(context).cardColor,
@@ -87,10 +98,15 @@ class _SettingsState extends State<Settings> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).cardColor,
-      appBar: AppBar(
-        title: const Text('Settings'),
-        backgroundColor: Theme.of(context).cardColor,
-        elevation: 0,
+      appBar: AppBarComponent(
+        title: 'Settings',
+        icon: InkWell(
+              onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainScreen()),
+                ),
+              child: const Icon(IconlyLight.arrow_left_circle),
+            ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -113,6 +129,82 @@ class _SettingsState extends State<Settings> {
             
             // Email Field
             _buildInfoField('Email Address', _userEmail, Icons.email),
+            const SizedBox(height: 40),
+            
+            // Theme Section
+            const Text(
+              'Appearance',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            
+            // Theme Toggle
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Theme.of(context).dividerColor,
+                  width: 1,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.dark_mode,
+                      color: Theme.of(context).primaryColor,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Dark Mode',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Switch between light and dark theme',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context).hintColor,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Switch(
+                    value: Theme.of(context).brightness == Brightness.dark,
+                    onChanged: (value) {
+                      // Get current theme and switch to opposite
+                      final currentTheme = context.read<ThemeCubit>().state;
+                      final newTheme = currentTheme == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                      context.read<ThemeCubit>().updateTheme(newTheme);
+                      print('Theme switched to: ${newTheme == ThemeMode.dark ? 'dark' : 'light'}');
+                    },
+                    activeColor: Theme.of(context).hintColor,
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 40),
             
             // Logout Button

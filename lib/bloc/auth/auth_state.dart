@@ -17,7 +17,7 @@ final class AuthFailState extends AuthState {
 } 
 
 final class AuthSuccessState extends AuthState {
-   String sucessMsg;
+    String sucessMsg;
     AuthSuccessState({ required this.sucessMsg});
 }
 
@@ -28,4 +28,11 @@ final class LogoutSuccessState extends AuthState {
 final class LogoutFailState extends AuthState {
   final String failMsg;
    const LogoutFailState({required this.failMsg});
+}
+
+final class UserDataLoaded extends AuthState {
+   final String name;
+   final String email;
+
+   const UserDataLoaded({required this.name, required this.email});
 }

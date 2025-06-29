@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tech_associate/data/repositories/auth_repository.dart';
+import 'package:tech_associate/data/repositories/user_repository.dart';
 import 'package:tech_associate/utils/connectivity_utils.dart';
 
 part 'auth_event.dart';
@@ -12,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInEvent>(_onSignIn);
     on<SignUpEvent>(_oSignUp);
     on<LogoutEvent>(_onLogout);
+    on<LoadCurrentUserData>(_onLoad);
   }
 
   Future<void> _onSignIn(SignInEvent event, Emitter<AuthState> emit) async {
@@ -70,5 +72,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
      } catch (e) {
        emit(AuthFailState(failMsg: 'Error occured $e'));
      }
+  }
+
+  Future<void> _onLoad(LoadCurrentUserData event, Emitter<AuthState> emit) async {
+      try{
+      final userRepository = UserRepository();
+      final currentUser = await userRepository.getCurrentUser();
+       emit(UserDataLoaded(name: currentUser!.name, email: currentUser.email));
+      }catch(e){
+       emit(AuthFailState(failMsg: 'Error occured $e'));        
+      }
   }
 }

@@ -38,3 +38,5 @@ class SignUpEvent extends AuthEvent {
 class LogoutEvent extends AuthEvent {
    const LogoutEvent();
 }
+
+class LoadCurrentUserData extends AuthEvent {}

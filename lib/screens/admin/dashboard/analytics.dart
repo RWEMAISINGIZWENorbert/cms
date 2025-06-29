@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconly/iconly.dart';
 import 'package:tech_associate/bloc/compliant/compliant_bloc.dart';
 import 'package:tech_associate/bloc/compliant/compliant_state.dart';
 import 'package:tech_associate/data/models/compliant.dart';
@@ -13,9 +14,9 @@ class Analytics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarComponent(
+      appBar: const  AppBarComponent(
         title: 'Analytics',
-        icon:  Icon(Icons.analytics_outlined),
+        icon:  Icon(IconlyLight.arrow_left_circle),
       ),
       body: BlocBuilder<CompliantBloc, CompliantState>(
         builder: (context, state) {

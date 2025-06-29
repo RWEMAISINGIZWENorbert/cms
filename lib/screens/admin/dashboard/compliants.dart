@@ -9,6 +9,7 @@ import 'package:tech_associate/bloc/compliant/compliant_state.dart';
 import 'package:tech_associate/data/models/compliant.dart';
 import 'package:tech_associate/widgets/app_bar.dart';
 import 'package:tech_associate/screens/admin/dashboard/complaint_details.dart';
+import 'package:tech_associate/screens/admin/dashboard/main_screen.dart';
 
 class Compliants extends StatefulWidget {
   const Compliants({super.key});
@@ -101,28 +102,45 @@ class _CompliantsState extends State<Compliants> {
     );
   }
 
-  PreferredSizeWidget _buildNormalAppBar() {
-    return AppBarComponent(
-      icon: InkWell(
-        onTap: () => Navigator.of(context).pop(),
-        child: const Icon(IconlyLight.arrow_left_circle),
+  PreferredSizeWidget  _buildNormalAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight),
+      child: BlocBuilder<CompliantBloc, CompliantState>(
+        builder: (context, state) {
+          int complaintsCount = 0;
+          if (state is CompliantLoaded) {
+            complaintsCount = state.compliants.length;
+          } else if (state is CompliantSuccess && state.updatedCompliant != null) {
+            complaintsCount = 1;
+          }
+          
+          return AppBarComponent(
+            icon: InkWell(
+              onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainScreen()),
+                ),
+              child: const Icon(IconlyLight.arrow_left_circle),
+            ),
+            title: 'Compliants ($complaintsCount)',
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: _toggleSearch,
+                    icon: const Icon(IconlyLight.search, size: 22),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(IconlyLight.filter_2, size: 22),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
       ),
-      title: 'Compliants',
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: _toggleSearch,
-              icon: const Icon(IconlyLight.search, size: 22),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(IconlyLight.filter_2, size: 22),
-            ),
-          ],
-        ),
-      ],
     );
   }
 
@@ -262,7 +280,7 @@ class _CompliantsState extends State<Compliants> {
               const SizedBox(height: 16),
               Text(
                 complaint.title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),

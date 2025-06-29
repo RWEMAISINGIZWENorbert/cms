@@ -1,9 +1,9 @@
-# Tech Associate - Complaint Management System(cms)
+# Complaint Management System(cms)
 
-![Tech Associate Logo](assets/images/logo.png)
+<!-- ![Tech Associate Logo](assets/images/logo.png) -->
 
 ## 📱 Overview
-Tech Associate is a comprehensive complaint management system that enables users to submit, track, and manage complaints efficiently. The system provides real-time updates, offline support, and seamless synchronization between mobile app and server.
+cms is a comprehensive complaint management system that enables users to submit, track, and manage complaints efficiently. The system provides real-time updates, offline support, and seamless synchronization between mobile app and server.
 
 ## 🚀 Features
 - 📝 Submit and track complaints
@@ -11,7 +11,7 @@ Tech Associate is a comprehensive complaint management system that enables users
 - 📱 Offline support with local storage
 - 🔐 Secure authentication
 - 📊 Department-wise complaint management
-- 📱 Cross-platform support (Android)
+- 📱 Cross-platform support (Android & iphone)
 - 🔔 SMS notifications for status updates
 
 ## 🛠 Tech Stack
@@ -36,7 +36,7 @@ Tech Associate is a comprehensive complaint management system that enables users
 ```dart
 Base URL: https://cms-qctx.onrender.com
 
-Endpoints:
+Api Endpoints:
 - POST /complaints/create    - Create new complaint
 - GET  /complaints/department - Get department complaints
 - PUT  /complaints/update/:id - Update complaint
@@ -59,8 +59,8 @@ lib/
 ### Prerequisites
 - Flutter SDK (latest version)
 - Android Studio / VS Code
-- Node.js and npm
-- MongoDB
+<!-- - Node.js and npm
+- MongoDB -->
 
 ### Installation
 
@@ -143,5 +143,5 @@ flutter run
 5. Create a Pull Request
 
 
-## 👥 Authors
+## 👥 Author
 - Rwema Isingizwe Norbert

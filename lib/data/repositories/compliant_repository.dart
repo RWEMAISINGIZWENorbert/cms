@@ -30,37 +30,31 @@ class CompliantRepository {
 
           if (response.statusCode == 200) {
             final List<dynamic> data = jsonDecode(response.body)['data'];
+            print("Fist Data ${data.length}");
             final serverCompliants = data.map((json) => Compliant.fromJson(json)).toList();
+            print("------serverCompliants ${serverCompliants.length}");
+
+            // Clear existing data and save all server data
+            await compliantBox.clear();
             
-            // Merge server data with local data
+            // Save all server complaints to local storage with new local IDs
             for (var serverCompliant in serverCompliants) {
-              // Find matching local complaint by server ID or other unique identifiers
-              final localCompliant = localCompliants.firstWhere(
-                (c) => c.serverId == serverCompliant.serverId || 
-                       (c.title == serverCompliant.title && 
-                        c.submittedBy == serverCompliant.submittedBy &&
-                        c.createdAt.difference(serverCompliant.createdAt).inMinutes.abs() < 5),
-                orElse: () {
-                  // If no match found, create new local complaint with local ID
-                  final newLocalId = _generateUnique6DigitId().toString();
-                  return serverCompliant.copyWith(
-                    id: newLocalId,
-                    serverId: serverCompliant.id, // Store server ID for future reference
-                  );
-                },
+              // Generate a new local ID for each server complaint
+              final newLocalId = _generateUnique6DigitIdSync();
+              
+              // Create new complaint with local ID but keep server ID reference
+              final newCompliant = serverCompliant.copyWith(
+                id: newLocalId,
+                serverId: serverCompliant.id, // Store server ID for future reference
               );
               
-              // Update local storage if server data is newer
-              if (serverCompliant.updatedAt.isAfter(localCompliant.updatedAt)) {
-                final updatedCompliant = serverCompliant.copyWith(
-                  id: localCompliant.id, // Keep local ID
-                  serverId: serverCompliant.id, // Update server ID reference
-                );
-                await compliantBox.put(updatedCompliant.id, updatedCompliant);
-              }
+              // Save to local storage
+              await compliantBox.put(newCompliant.id, newCompliant);
+              print("Saved complaint with local ID: $newLocalId, server ID: ${serverCompliant.id}");
             }
             
-            // Return merged data
+            print("--------Data ${compliantBox.values.length}");
+            // Return all data from local storage
             return compliantBox.values.toList();
           }
         } catch (e) {
@@ -78,13 +72,17 @@ class CompliantRepository {
     }
   }
 
-  Future<String> _generateUnique6DigitId() async {
+  String _generateUnique6DigitIdSync() {
     final random = Random();
     String id;
     do {
       id = (100000 + random.nextInt(900000)).toString();
     } while (compliantBox.values.any((item) => item.id == id));
     return id;
+  }
+
+  Future<String> _generateUnique6DigitId() async {
+    return _generateUnique6DigitIdSync();
   }
 
   Future<Compliant> addCompliant({
