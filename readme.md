@@ -3,7 +3,7 @@
 <!-- ![Tech Associate Logo](assets/images/logo.png) -->
 
 ## 📱 Overview
-CMS is a comprehensive complaint management system that enables users to submit, track, and manage complaints efficiently. The system provides real-time updates, offline support, seamless synchronization between mobile app and server, and advanced analytics for staff management.
+CMS is a comprehensive complaint management system that enables citzens to submit, track, and manage complaints efficiently. The system provides real-time updates, offline support, seamless synchronization between mobile app and server, and advanced dasboard and analytics for staff management.
 
 ## 🚀 Features
 
