@@ -92,9 +92,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocListener<CompliantBloc, CompliantState>(
         listener: (context, state) {
           if (state is CompliantSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message, style: Theme.of(context).textTheme.displayMedium),
+                            showCloseIcon: true,
+                            backgroundColor: Theme.of(context).cardColor,
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            duration: const Duration(days: 1),
+                            closeIconColor: Theme.of(context).hintColor, // Effectively infinite
+                          )
+                        );
             // Clear form after successful submission
             _formKey.currentState?.reset();
             _selectedCategory = null;

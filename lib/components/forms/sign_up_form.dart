@@ -187,10 +187,28 @@ class _SignUpFormState extends State<SignUpForm> {
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if(state is AuthSuccessState){
-                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.sucessMsg)));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.sucessMsg, style: Theme.of(context).textTheme.displayMedium),
+                            showCloseIcon: true,
+                            backgroundColor: Theme.of(context).cardColor,
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            duration: const Duration(days: 1),
+                            closeIconColor: Theme.of(context).hintColor, // Effectively infinite
+                          )
+                        );
                      Navigator.pushNamed(context, '/signIn');
                   }else if(state is AuthFailState){
-                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.failMsg)));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.failMsg, style: Theme.of(context).textTheme.displayMedium),
+                            showCloseIcon: true,
+                            backgroundColor: Theme.of(context).cardColor,
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            duration: const Duration(days: 1),
+                            closeIconColor: Theme.of(context).hintColor, // Effectively infinite
+                          )
+                        );
                   }
                 },
                 builder: (context, state) {
