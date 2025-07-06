@@ -182,16 +182,21 @@ class ComplaintDetails extends StatelessWidget {
                 : complaint;
 
         // Show success message when state is CompliantSuccess
-        if (state is CompliantSuccess) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.green,
-                duration: const Duration(seconds: 2),
-              ),
+        // if (state is CompliantSuccess) {
+        //   WidgetsBinding.instance.addPostFrameCallback((_) {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //       SnackBar(
+        //         content: Text(state.message),
+        //         backgroundColor: Colors.green,
+        //         duration: const Duration(seconds: 2),
+        //       ),
+        //     );
+        //   });
+        // }
+        if(state is CompliantLoading){
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          });
         }
 
         return Scaffold(

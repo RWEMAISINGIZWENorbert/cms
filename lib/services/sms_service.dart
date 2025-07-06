@@ -34,7 +34,7 @@ class SMSService {
       
       print("-------------------------------------------Preparing Request-------------------------------");
       final auth = base64Encode(utf8.encode('$accountSid:$authToken'));
-      print("Auth header prepared");
+      print("Auth header prepared $auth");
       
       final body = {
         'From': senderId,

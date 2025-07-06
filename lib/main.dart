@@ -22,6 +22,8 @@ import 'package:tech_associate/screens/citizens/home_screen.dart';
 import 'package:tech_associate/screens/citizens/track_status.dart';
 import 'package:tech_associate/data/repositories/user_repository.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +36,7 @@ void main() async {
               (await getApplicationDocumentsDirectory()).path,
             ),
   ); 
-  
+   await dotenv.load(fileName: ".env");
   // Initialize Hive
   await Hive.initFlutter();
   

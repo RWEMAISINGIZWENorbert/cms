@@ -6,14 +6,15 @@ import 'package:tech_associate/bloc/compliant/compliant_event.dart';
 import 'package:tech_associate/bloc/compliant/compliant_state.dart';
 import 'package:tech_associate/services/sms_service.dart';
 import 'package:tech_associate/utils/connectivity_utils.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CompliantBloc extends Bloc<CompliantEvent, CompliantState> {
   final CompliantRepository repository;
   final UserRepository userRepository;
   final SMSService _smsService = SMSService(
-    accountSid: SMSConfig.accountSid,
-    authToken: SMSConfig.authToken,
-    senderId: SMSConfig.senderId,
+    accountSid: dotenv.env['TWILIO_ACCOUNT_SID'] ?? '',
+    authToken: dotenv.env['TWILIO_AUTH_TOKEN'] ?? '',
+    senderId: dotenv.env['SENDER_ID'] ?? '',
   );
 
   CompliantBloc({

@@ -14,9 +14,11 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return
+      Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13),
-      child: ElevatedButton(
+      child: 
+      ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
                  backgroundColor: Theme.of(context).primaryColor,
@@ -26,7 +28,8 @@ class ContinueButton extends StatelessWidget {
                   )
                  ),
                   child: Center(
-                     child: Text(label, style: GoogleFonts.poppins(
+                     child: Text(
+                      label, style: GoogleFonts.poppins(
                        color: Colors.white,
                        fontSize: 18,
                        fontWeight: FontWeight.w400

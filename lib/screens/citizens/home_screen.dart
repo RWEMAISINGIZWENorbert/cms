@@ -167,6 +167,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 BlocBuilder<CompliantBloc, CompliantState>(
                   builder: (context, state) {
+                     if(state is CompliantLoading){
+                       print("Load...........");
+                       return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 13),
+                        child:  ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(  
+                            backgroundColor: Theme.of(context).primaryColor,
+                            elevation: 0,
+                            minimumSize: const Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14)
+                        )
+                      ),
+                  child: const CircularProgressIndicator()
+                   )
+                       );
+                     }
                     return ContinueButton(
                       label: 'Submit',
                       onPressed: state is CompliantLoading ? () {} : _handleSubmit,
